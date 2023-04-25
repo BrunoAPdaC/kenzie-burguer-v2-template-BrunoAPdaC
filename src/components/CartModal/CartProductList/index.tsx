@@ -35,7 +35,9 @@ const CartProductList = () => {
     <StyledCartProductList>
       {cartProducts.length === 0 ? null : (
         <ul>
-          <CartProductCard />;
+          {cartProducts.map((current) => {
+            return <CartProductCard key={current.id} product={current} />;
+          })}
         </ul>
       )}
       {cartProducts.length === 0 ? null : (
