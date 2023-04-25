@@ -14,14 +14,28 @@ interface INewproviderModal {
   navigate: NavigateFunction;
   token?: string | null;
   listProducts: IProduct[];
-
   setListProducts: React.Dispatch<React.SetStateAction<IProduct[]>>;
+  filterProducts: IProduct[];
+  setSearchProduct: React.Dispatch<React.SetStateAction<string>>;
+  searchProduct: string;
+  searchInput: string;
+  setSearchInput: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const UserContext = createContext({} as INewproviderModal);
 
 export function UserProvider({ children }: INewProviderProps) {
+  const [searchProduct, setSearchProduct] = useState("");
   const [listProducts, setListProducts] = useState<IProduct[]>([]);
+  const [searchInput, setSearchInput] = useState("");
+
+  const filterProducts = listProducts.filter(
+    (currentP) =>
+      currentP.name.toLowerCase().includes(searchProduct.toLowerCase()) ||
+      currentP.category.toLowerCase().includes(searchProduct.toLowerCase())
+  );
+  console.log(filterProducts);
+
   const [cartProducts, setCartProducts] = useState<IProduct[]>([]);
   const [openModalCart, setOpenModalCart] = useState(false);
   const navigate = useNavigate();
@@ -45,6 +59,11 @@ export function UserProvider({ children }: INewProviderProps) {
         cartProducts,
         setListProducts,
         listProducts,
+        filterProducts,
+        setSearchProduct,
+        searchProduct,
+        searchInput,
+        setSearchInput,
       }}
     >
       {children}

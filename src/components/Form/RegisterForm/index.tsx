@@ -54,7 +54,7 @@ const RegisterForm = () => {
       toast.error(error.response.data);
     }
   }
-  console.log(errors);
+
   return (
     <StyledForm onSubmit={handleSubmit(handleRegister)}>
       <Input

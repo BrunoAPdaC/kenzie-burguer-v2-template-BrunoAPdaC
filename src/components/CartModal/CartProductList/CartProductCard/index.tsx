@@ -5,8 +5,12 @@ import { StyledTitle } from "../../../../styles/typography";
 import { useContext } from "react";
 import { UserContext } from "../../../../Providers/UserContext";
 import { toast } from "react-toastify";
+import { IProduct } from "../../../ProductList/ProductCard";
+interface IPropsCart {
+  product: IProduct;
+}
 
-const CartProductCard = ({ product }: any) => {
+const CartProductCard = ({ product }: IPropsCart) => {
   const { cartProducts, setCartProducts } = useContext(UserContext);
 
   function removeProductCart(currentId: string) {

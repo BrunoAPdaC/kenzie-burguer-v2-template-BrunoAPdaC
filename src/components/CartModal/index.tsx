@@ -8,7 +8,6 @@ import { UserContext } from "../../Providers/UserContext";
 const CartModal = () => {
   const { setOpenModalCart, openModalCart, cartProducts } =
     useContext(UserContext);
-  console.log(cartProducts);
 
   return openModalCart === true ? (
     <StyledCartModalBox>

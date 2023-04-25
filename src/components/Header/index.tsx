@@ -9,11 +9,15 @@ import { useContext } from "react";
 import { UserContext } from "../../Providers/UserContext";
 
 const Header = () => {
-  const { setOpenModalCart, navigate } = useContext(UserContext);
+  const { setOpenModalCart, navigate, searchProduct, setSearchProduct } =
+    useContext(UserContext);
 
   function logoutUser() {
     localStorage.removeItem("@TokenUser");
     navigate("/");
+  }
+  function clearSearch() {
+    setSearchProduct("");
   }
   return (
     <StyledHeader>
@@ -38,6 +42,9 @@ const Header = () => {
               <button type="button" onClick={logoutUser}>
                 <MdLogout size={28} />
               </button>
+              {searchProduct !== "" ? (
+                <button onClick={clearSearch}>Limpar Busca</button>
+              ) : null}
             </div>
           </nav>
         </div>
