@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { UserContext } from "../../../../Providers/UserContext";
 import { toast } from "react-toastify";
 
-const CartProductCard = ({ product }) => {
+const CartProductCard = ({ product }: any) => {
   const { cartProducts, setCartProducts } = useContext(UserContext);
 
   function removeProductCart(currentId: string) {

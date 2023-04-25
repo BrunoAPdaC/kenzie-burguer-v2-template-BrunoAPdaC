@@ -13,11 +13,15 @@ interface INewproviderModal {
   openModalCart: boolean;
   navigate: NavigateFunction;
   token?: string | null;
+  listProducts: IProduct[];
+
+  setListProducts: React.Dispatch<React.SetStateAction<IProduct[]>>;
 }
 
 export const UserContext = createContext({} as INewproviderModal);
 
 export function UserProvider({ children }: INewProviderProps) {
+  const [listProducts, setListProducts] = useState<IProduct[]>([]);
   const [cartProducts, setCartProducts] = useState<IProduct[]>([]);
   const [openModalCart, setOpenModalCart] = useState(false);
   const navigate = useNavigate();
@@ -39,6 +43,8 @@ export function UserProvider({ children }: INewProviderProps) {
         token,
         setCartProducts,
         cartProducts,
+        setListProducts,
+        listProducts,
       }}
     >
       {children}

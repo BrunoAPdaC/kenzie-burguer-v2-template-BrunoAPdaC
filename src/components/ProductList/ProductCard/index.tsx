@@ -14,9 +14,8 @@ export interface IProduct {
   id: string;
 }
 
-const ProductCard = () => {
+const ProductCard = ({ setListProducts, product }: any) => {
   const { token, setCartProducts, cartProducts } = useContext(UserContext);
-  const [listProducts, setListProducts] = useState<IProduct[]>([]);
 
   async function loadProduct() {
     try {
@@ -40,33 +39,31 @@ const ProductCard = () => {
     }
   };
 
-  return listProducts.map((product) => {
-    return (
-      <StyledProductCard key={product.id}>
-        <div className="imageBox">
-          <img src={product.img} alt={product.name} />
-        </div>
-        <div className="content">
-          <StyledTitle tag="h3" $fontSize="three">
-            {product.name}
-          </StyledTitle>
-          <StyledParagraph className="category">
-            {product.category}
-          </StyledParagraph>
-          <StyledParagraph className="price">
-            {product.price.toFixed(2)}
-          </StyledParagraph>
-          <StyledButton
-            $buttonSize="medium"
-            $buttonStyle="green"
-            onClick={() => addProductList(product)}
-          >
-            Adicionar
-          </StyledButton>
-        </div>
-      </StyledProductCard>
-    );
-  });
+  return (
+    <StyledProductCard key={product.id}>
+      <div className="imageBox">
+        <img src={product.img} alt={product.name} />
+      </div>
+      <div className="content">
+        <StyledTitle tag="h3" $fontSize="three">
+          {product.name}
+        </StyledTitle>
+        <StyledParagraph className="category">
+          {product.category}
+        </StyledParagraph>
+        <StyledParagraph className="price">
+          {product.price.toFixed(2)}
+        </StyledParagraph>
+        <StyledButton
+          $buttonSize="medium"
+          $buttonStyle="green"
+          onClick={() => addProductList(product)}
+        >
+          Adicionar
+        </StyledButton>
+      </div>
+    </StyledProductCard>
+  );
 };
 
 export default ProductCard;
