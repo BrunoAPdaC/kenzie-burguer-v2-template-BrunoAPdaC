@@ -13,8 +13,12 @@ export interface IProduct {
   price: number;
   id: string;
 }
+interface IProps {
+  product: IProduct;
+  setListProducts: React.Dispatch<React.SetStateAction<IProduct[]>>;
+}
 
-const ProductCard = ({ setListProducts, product }: any) => {
+const ProductCard = ({ setListProducts, product }: IProps) => {
   const { token, setCartProducts, cartProducts } = useContext(UserContext);
 
   async function loadProduct() {
