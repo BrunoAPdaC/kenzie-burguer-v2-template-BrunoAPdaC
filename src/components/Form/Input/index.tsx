@@ -1,13 +1,21 @@
-import { StyledInputContainer } from '../../../styles/form';
-import { StyledParagraph } from '../../../styles/typography';
+import { StyledInputContainer } from "../../../styles/form";
+import { StyledParagraph } from "../../../styles/typography";
 
-const Input = ({ id }) => (
+interface IInputProps {
+  label?: string;
+  error?: string;
+  id: string;
+  type: "email" | "password" | "name";
+  register: object;
+}
+
+const Input = ({ label, error, type, id, register }: IInputProps) => (
   <div>
     <StyledInputContainer>
-      <input type='text' id={id} placeholder=' ' />
-      <label htmlFor={id}>Teste</label>
+      <input type={type} {...register} />
+      <label htmlFor={id}>{label}</label>
     </StyledInputContainer>
-    <StyledParagraph fontColor='red'>Erro</StyledParagraph>
+    <StyledParagraph fontColor="red">{error}</StyledParagraph>
   </div>
 );
 

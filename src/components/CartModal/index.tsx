@@ -1,38 +1,48 @@
-import { MdClose } from 'react-icons/md';
-import CartProductList from './CartProductList';
+import { MdClose } from "react-icons/md";
+import CartProductList from "./CartProductList";
 
-import { StyledCartModalBox } from './style';
-import { StyledParagraph, StyledTitle } from '../../styles/typography';
+import { StyledCartModalBox } from "./style";
+import { StyledParagraph, StyledTitle } from "../../styles/typography";
+import { useContext } from "react";
+import { UserContext } from "../../Providers/UserContext";
+const CartModal = () => {
+  const { setOpenModalCart, openModalCart, cartProducts } =
+    useContext(UserContext);
+  console.log(cartProducts);
 
-const CartModal = () => (
-  <StyledCartModalBox>
-    <dialog>
-      <header>
-        <StyledTitle tag='h2' $fontSize='three'>
-          Carrinho de compras
-        </StyledTitle>
-        <button
-          type='button'
-          aria-label='Fechar'
-          onClick={() => {
-            console.log('Lógica aqui');
-          }}
-        >
-          <MdClose size={21} />
-        </button>
-      </header>
-      <div className='cartBox'>
-        <CartProductList />
-
-        <div className='emptyBox'>
-          <StyledTitle tag='h3' $fontSize='three' textAlign='center'>
-            Sua sacola está vazia
+  return openModalCart === true ? (
+    <StyledCartModalBox>
+      <dialog>
+        <header>
+          <StyledTitle tag="h2" $fontSize="three">
+            Carrinho de compras
           </StyledTitle>
-          <StyledParagraph textAlign='center'>Adicione itens</StyledParagraph>
+          <button
+            type="button"
+            aria-label="Fechar"
+            onClick={() => {
+              setOpenModalCart(false);
+            }}
+          >
+            <MdClose size={21} />
+          </button>
+        </header>
+        <div className="cartBox">
+          <CartProductList />
+          {cartProducts.length === 0 ? (
+            <div className="emptyBox">
+              <StyledTitle tag="h3" $fontSize="three" textAlign="center">
+                Sua sacola está vazia
+              </StyledTitle>
+              <StyledParagraph textAlign="center">
+                Adicione itens
+              </StyledParagraph>
+            </div>
+          ) : null}
         </div>
-      </div>
-    </dialog>
-  </StyledCartModalBox>
-);
+      </dialog>
+    </StyledCartModalBox>
+  ) : null;
+};
 
 export default CartModal;

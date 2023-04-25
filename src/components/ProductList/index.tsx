@@ -1,5 +1,5 @@
-import ProductCard from './ProductCard';
-import { StyledProductList } from './style';
+import ProductCard from "./ProductCard";
+import { StyledProductList } from "./style";
 
 const ProductList = () => (
   <StyledProductList>
