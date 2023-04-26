@@ -3,21 +3,15 @@ import { MdDelete } from "react-icons/md";
 import { StyledCartProductCard } from "./style";
 import { StyledTitle } from "../../../../styles/typography";
 import { useContext } from "react";
-import { UserContext } from "../../../../Providers/UserContext";
-import { toast } from "react-toastify";
-import { IProduct } from "../../../ProductList/ProductCard";
+import { CartContext, IProduct } from "../../../../Providers/CartContext";
+
 interface IPropsCart {
   product: IProduct;
 }
 
 const CartProductCard = ({ product }: IPropsCart) => {
-  const { cartProducts, setCartProducts } = useContext(UserContext);
-
-  function removeProductCart(currentId: string) {
-    const newCard = cartProducts.filter((data) => data.id !== currentId);
-    setCartProducts(newCard);
-    toast.success("Item removido do carrinho");
-  }
+  const { cartProducts, setCartProducts, removeProductCart } =
+    useContext(CartContext);
 
   return (
     <StyledCartProductCard key={product.id}>

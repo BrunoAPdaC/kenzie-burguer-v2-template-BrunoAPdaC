@@ -5,33 +5,16 @@ import { api } from "../../../services/api";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../Providers/UserContext";
 import { toast } from "react-toastify";
+import { CartContext, IProduct } from "../../../Providers/CartContext";
 
-export interface IProduct {
-  img: string;
-  name: string;
-  category: string;
-  price: number;
-  id: string;
-}
 interface IProps {
   product: IProduct;
   setListProducts: React.Dispatch<React.SetStateAction<IProduct[]>>;
 }
 
 const ProductCard = ({ setListProducts, product }: IProps) => {
-  const { token, setCartProducts, cartProducts } = useContext(UserContext);
-
-  async function loadProduct() {
-    try {
-      const response = await api.get("/products", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setListProducts(response.data);
-    } catch (error) {}
-  }
-  useEffect(() => {
-    loadProduct();
-  }, []);
+  const { token } = useContext(UserContext);
+  const { setCartProducts, cartProducts } = useContext(CartContext);
 
   const addProductList = (product: IProduct) => {
     if (!cartProducts.some((current) => current.id === product.id)) {

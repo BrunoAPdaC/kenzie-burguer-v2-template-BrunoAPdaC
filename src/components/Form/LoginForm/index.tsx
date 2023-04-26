@@ -40,7 +40,6 @@ function LoginForm() {
     try {
       const response = await api.post("/login", data);
       const tokenA = response.data.accessToken;
-
       toast.success("Login feito com sucesso");
       localStorage.setItem("@TokenUser", tokenA);
       navigate("/shop");

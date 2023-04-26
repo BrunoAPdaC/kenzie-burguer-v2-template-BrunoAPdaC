@@ -4,32 +4,17 @@ import { StyledCartProductList } from "./style";
 import { StyledButton } from "../../../styles/button";
 import { StyledParagraph } from "../../../styles/typography";
 import { useContext } from "react";
-import { UserContext } from "../../../Providers/UserContext";
-import { toast } from "react-toastify";
 
-interface ICartProduct {
-  category: string;
-  id: string;
-  img: string;
-  name: string;
-  price: number;
-}
+import { CartContext } from "../../../Providers/CartContext";
 
 const CartProductList = () => {
-  const { cartProducts, setCartProducts } = useContext(UserContext);
+  const { cartProducts, removeAllCart } = useContext(CartContext);
   const totalPrice = cartProducts.reduce(
     (accumulator: number, currentvalue) => {
       return accumulator + currentvalue.price;
     },
     0
   );
-
-  function removeAllCart() {
-    if (cartProducts.length >= 1) {
-      setCartProducts([]);
-      toast.success("Todos itens removidos do carrinho");
-    }
-  }
 
   return (
     <StyledCartProductList>

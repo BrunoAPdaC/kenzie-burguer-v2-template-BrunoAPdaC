@@ -5,9 +5,10 @@ import { StyledCartModalBox } from "./style";
 import { StyledParagraph, StyledTitle } from "../../styles/typography";
 import { useContext } from "react";
 import { UserContext } from "../../Providers/UserContext";
+import { CartContext } from "../../Providers/CartContext";
 const CartModal = () => {
-  const { setOpenModalCart, openModalCart, cartProducts } =
-    useContext(UserContext);
+  const { setOpenModalCart, openModalCart } = useContext(UserContext);
+  const { cartProducts } = useContext(CartContext);
 
   return openModalCart === true ? (
     <StyledCartModalBox>

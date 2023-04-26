@@ -1,24 +1,16 @@
 import { MdShoppingCart, MdLogout } from "react-icons/md";
-
 import SearchForm from "./SearchForm";
 import { StyledHeader } from "./style";
 import LogoKenzieBurguer from "../../assets/LogoKenzieBurguer.svg";
-
 import { StyledContainer } from "../../styles/grid";
 import { useContext } from "react";
 import { UserContext } from "../../Providers/UserContext";
+import { CartContext } from "../../Providers/CartContext";
 
 const Header = () => {
-  const { setOpenModalCart, navigate, searchProduct, setSearchProduct } =
-    useContext(UserContext);
+  const { setOpenModalCart, logoutUser } = useContext(UserContext);
+  const { searchProduct, clearSearch } = useContext(CartContext);
 
-  function logoutUser() {
-    localStorage.removeItem("@TokenUser");
-    navigate("/");
-  }
-  function clearSearch() {
-    setSearchProduct("");
-  }
   return (
     <StyledHeader>
       <StyledContainer containerWidth={1300}>

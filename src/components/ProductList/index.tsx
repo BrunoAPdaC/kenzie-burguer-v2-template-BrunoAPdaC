@@ -1,26 +1,21 @@
-import { useContext, useEffect, useState } from "react";
-import ProductCard, { IProduct } from "./ProductCard";
+import { useContext, useEffect } from "react";
+import ProductCard from "./ProductCard";
 import { StyledProductList } from "./style";
 import { UserContext } from "../../Providers/UserContext";
 import { api } from "../../services/api";
+import { CartContext } from "../../Providers/CartContext";
 
 const ProductList = () => {
   const {
     listProducts,
     setListProducts,
-    token,
+    loadProduct,
     searchProduct,
     filterProducts,
-  } = useContext(UserContext);
+  } = useContext(CartContext);
+  const { token } = useContext(UserContext);
   const newList = searchProduct !== "" ? filterProducts : listProducts;
-  async function loadProduct() {
-    try {
-      const response = await api.get("/products", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setListProducts(response.data);
-    } catch (error) {}
-  }
+
   useEffect(() => {
     loadProduct();
   }, []);
